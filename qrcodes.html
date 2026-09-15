@@ -46,7 +46,7 @@
   .usage-item strong { display: block; margin-bottom: 4px; }
 
   @media print {
-    .nav, .no-print, h2, .intro-text, .usage-block { display: none !important; }
+    .nav, .no-print, h2, .intro-text, .usage-block, .site-footer { display: none !important; }
     .poster-grid { grid-template-columns: 1fr; }
     .poster { break-inside: avoid; page-break-after: always; box-shadow: none; }
     body { background: #fff; }
@@ -98,7 +98,19 @@
   </section>
 </main>
 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><img id="footer-logo-img" hidden></div>
+    <div class="footer-text">
+      <span class="eyebrow">Sobre nós</span>
+      <p id="footer-descricao"></p>
+      <a id="footer-link" href="#" target="_blank" rel="noopener" hidden>Saiba mais →</a>
+    </div>
+  </div>
+</footer>
+
 <script src="config.js"></script>
+<script src="js/footer.js"></script>
 <script>
   const formularios = [
     {

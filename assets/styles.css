@@ -470,7 +470,33 @@ table.roster tr:hover td { background: var(--surface-2); }
   word-break: break-all;
 }
 
-/* ============ 9. RESPONSIVO ============ */
+/* ============ 9. RODAPÉ — SOBRE NÓS / INSTITUIÇÃO ============ */
+.site-footer {
+  background: var(--pine);
+  color: var(--ink-on-pine);
+  margin-top: 56px;
+}
+.footer-inner {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding: 32px 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-logo img {
+  display: block;
+  max-height: 56px;
+  max-width: 160px;
+  object-fit: contain;
+}
+.footer-text { flex: 1; min-width: 240px; }
+.footer-text .eyebrow { color: inherit; opacity: 0.75; }
+.footer-text p { color: inherit; opacity: 0.92; margin: 0; max-width: 62ch; }
+.footer-text a { color: inherit; text-decoration: underline; }
+
+/* ============ 10. RESPONSIVO ============ */
 @media (max-width: 640px) {
   .card { padding: 18px; }
   .nav-tabs a { padding: 7px 10px; font-size: 0.82rem; }

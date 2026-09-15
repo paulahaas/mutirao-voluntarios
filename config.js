@@ -172,4 +172,34 @@ const CONFIG = {
   painel: {
     pin: "mutirao2026",
   },
+
+  // ================================================================
+  // 10. SOBRE NÓS / INSTITUIÇÃO — aparece num rodapé em todas as
+  // páginas, inclusive nas que o QR Code leva direto (voluntário,
+  // parceiro, doador). Existe porque quem recebe o link encaminhado
+  // por terceiros pode não ter contexto nenhum sobre o projeto — essa
+  // seção existe pra dar confiança de que é um projeto real e não
+  // golpe, principalmente pra quem for doar.
+  //
+  // TROQUE o texto abaixo pelo texto real de vocês (nome da
+  // instituição, curso/disciplina, o que é o projeto).
+  //
+  // Para a logo: coloque o arquivo de imagem dentro da pasta assets/
+  // (ex: assets/logo-instituicao.png) e escreva o caminho em `logo`
+  // abaixo. Deixe `logo: ""` para não mostrar nenhuma imagem (só o
+  // texto aparece).
+  // ================================================================
+  instituicao: {
+    nome: "UniCesumar",
+    logo: "", // ex: "assets/logo-instituicao.png"
+    descricao:
+      "Este projeto é uma iniciativa de extensão do Grupo 02 da " +
+      "UniCesumar, criada para apoiar a organização de um mutirão " +
+      "comunitário. Se você recebeu este link de alguém, pode ficar " +
+      "tranquilo: é um projeto real, ligado à instituição de ensino.",
+    // Opcional: link para o Instagram/site da instituição ou do grupo,
+    // pra quem quiser confirmar que o projeto existe de verdade antes
+    // de doar. Deixe "" para não mostrar o link.
+    link: "",
+  },
 };

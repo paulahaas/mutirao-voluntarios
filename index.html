@@ -113,11 +113,23 @@
   </div>
 </main>
 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><img id="footer-logo-img" hidden></div>
+    <div class="footer-text">
+      <span class="eyebrow">Sobre nós</span>
+      <p id="footer-descricao"></p>
+      <a id="footer-link" href="#" target="_blank" rel="noopener" hidden>Saiba mais →</a>
+    </div>
+  </div>
+</footer>
+
 <script src="config.js"></script>
 <script>
   document.getElementById("evento-org").textContent = CONFIG.evento.organizacao;
   document.getElementById("evento-nome").textContent = CONFIG.evento.nome;
   document.getElementById("evento-data").textContent = CONFIG.evento.dataLocal;
 </script>
+<script src="js/footer.js"></script>
 </body>
 </html>
