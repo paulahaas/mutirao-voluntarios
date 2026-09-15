@@ -339,6 +339,16 @@ textarea { resize: vertical; min-height: 88px; }
 .form-status--ok { background: var(--good-bg); color: var(--good); }
 .form-status--error { background: var(--critical-bg); color: var(--critical); }
 
+/* Campo-armadilha anti-spam: some contadores automáticos preenchem
+   todo campo que encontram — pessoas nunca veem nem preenchem este. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* ============ 7. PAINEL / DASHBOARD ============ */
 .stat-row {
   display: grid;

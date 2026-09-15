@@ -124,7 +124,10 @@
     },
   ];
 
-  const baseUrl = CONFIG.SITE_BASE_URL || window.location.origin + window.location.pathname.replace(/qrcodes\.html$/, "");
+  // Todas as páginas vivem na raiz do site, então a origem sozinha já
+  // é a base certa — evita depender do caminho exato desta página
+  // (que pode variar conforme o servidor reescreve URLs).
+  const baseUrl = CONFIG.SITE_BASE_URL || window.location.origin;
   if (!CONFIG.SITE_BASE_URL) {
     document.getElementById("aviso-base-url").style.display = "block";
   }

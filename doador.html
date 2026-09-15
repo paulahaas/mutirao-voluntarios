@@ -30,6 +30,11 @@
 
   <form id="form" class="card stack" novalidate>
 
+    <div class="honeypot" aria-hidden="true">
+      <label for="site">Deixe em branco</label>
+      <input type="text" id="site" name="site" tabindex="-1" autocomplete="off">
+    </div>
+
     <div class="field">
       <label for="nome">Nome</label>
       <input class="input" type="text" id="nome" name="nome" required autocomplete="name">

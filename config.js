@@ -17,7 +17,7 @@ const CONFIG = {
   // ================================================================
   evento: {
     nome: "Mutirão Comunitário",
-    organizacao: "Grupo 02 — Formulários, QR Codes e Voluntários",
+    organizacao: "Formulários, QR Codes e Voluntários",
     dataLocal: "Sábado, 08h às 17h — [defina data e local aqui]",
     corTema: "pine", // usado só como referência; cores reais ficam em assets/styles.css
   },
