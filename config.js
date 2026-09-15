@@ -32,12 +32,12 @@ const CONFIG = {
   backend: {
     // URL do Web App publicado no Google Apps Script (recebe os envios
     // dos 3 formulários e as atualizações de presença do painel).
-    APPS_SCRIPT_URL: "https://script.google.com/macros/s/SUBSTITUA_PELO_SEU_ID/exec",
+    APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbytc_BdO4PFDUkt7zPcswpfuSoJzhXk4y3fFhkUGDyoYeoAMSxd2gqw-Y-e97qhMmL8yQ/exec",
 
     // ID da planilha do Google Sheets (fica no meio da URL da planilha,
     // entre /d/ e /edit). A planilha precisa estar compartilhada como
     // "Qualquer pessoa com o link → Leitor" para o painel conseguir ler.
-    SHEET_ID: "SUBSTITUA_PELO_ID_DA_SUA_PLANILHA",
+    SHEET_ID: "1tVXdKz2i6mazq3CnaDdVvs0ks57V0_fydEnwpQVUzq8",
 
     // Nomes das abas dentro da planilha (não precisa mudar se você usar
     // o modelo pronto descrito no README).
