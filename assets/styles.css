@@ -116,8 +116,8 @@
 
 /* ============ 2. TIPOGRAFIA ============ */
 :root {
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
@@ -136,15 +136,15 @@ body {
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 640;
-  line-height: 1.12;
+  font-weight: 700;
+  line-height: 1.15;
   text-wrap: balance;
   margin: 0 0 0.4em;
   color: var(--ink);
 }
-h1 { font-size: clamp(1.9rem, 1.5rem + 2vw, 3rem); }
+h1 { font-size: clamp(1.9rem, 1.5rem + 2vw, 3rem); font-weight: 800; }
 h2 { font-size: clamp(1.4rem, 1.2rem + 1vw, 1.9rem); }
-h3 { font-size: 1.15rem; font-weight: 620; }
+h3 { font-size: 1.15rem; font-weight: 600; }
 
 p { margin: 0 0 1em; color: var(--ink); max-width: 65ch; }
 .muted { color: var(--ink-muted); }
@@ -192,7 +192,7 @@ a { color: var(--pine-strong); }
 }
 .nav-brand {
   font-family: var(--font-display);
-  font-weight: 640;
+  font-weight: 700;
   font-size: 1.05rem;
   color: var(--ink-on-pine);
   text-decoration: none;
