@@ -1,10 +1,49 @@
 # Mutirão Comunitário — Formulários, QR Codes e Painel de Voluntários
 
-Site estático (HTML/CSS/JS puro, sem build) com 3 formulários de inscrição,
-QR Codes prontos para divulgação, planilha do Google Sheets como banco de
-dados e um painel de acompanhamento em tempo (quase) real.
+## Sobre o projeto
 
-## Estrutura do projeto
+Este projeto foi criado para facilitar a organização de um **mutirão
+comunitário** (ação social): desde a inscrição de voluntários, parceiros e
+doadores, até o acompanhamento de quem confirmou presença no dia do evento.
+
+Antes, esse tipo de inscrição costuma ficar espalhada em conversas de
+WhatsApp, formulários soltos e planilhas preenchidas manualmente. Aqui,
+tudo fica centralizado e automático: a pessoa preenche um formulário no
+celular (inclusive escaneando um QR Code num cartaz), o cadastro cai sozinho
+numa planilha, e a organização acompanha tudo em um painel único — sem
+precisar copiar nada à mão.
+
+**🔗 Site publicado:** https://mutirao-voluntarios.vercel.app
+**📊 Planilha com os dados (voluntários, parceiros, doadores):** [abrir no Google Sheets](https://docs.google.com/spreadsheets/d/1tVXdKz2i6mazq3CnaDdVvs0ks57V0_fydEnwpQVUzq8/edit)
+
+### O que tem no site
+
+| Página | O que faz |
+|---|---|
+| **Início** | Ponto de entrada — a pessoa escolhe se quer ser voluntária, parceira ou doadora. |
+| **Quero ser voluntário** | Formulário de inscrição (nome, curso, disponibilidade, função de interesse etc.). |
+| **Quero ser parceiro** | Formulário para empresas/instituições que querem apoiar o mutirão. |
+| **Quero contribuir** | Formulário de doações (dinheiro, materiais, alimentos). |
+| **QR Codes** | Um cartaz pronto para impressão/redes sociais para cada formulário, com o QR Code já apontando pro link certo. |
+| **Painel** *(protegido por código de acesso)* | Mostra quantos se inscreveram, confirmaram e compareceram, quais funções ainda precisam de gente, e permite marcar presença no dia do evento. |
+
+### Como os dados fluem
+
+1. Alguém escaneia um QR Code (ou acessa o link direto) e preenche um formulário.
+2. O envio cai automaticamente numa aba da planilha do Google Sheets — sem
+   nenhuma digitação manual.
+3. O painel lê essa planilha em tempo quase real e mostra os números
+   atualizados.
+4. No dia do mutirão, a organização marca "Confirmado" e "Presença" direto
+   no painel (ou na própria planilha) — e isso é a única parte manual, de
+   propósito, porque exige uma decisão de alguém da equipe.
+
+---
+
+## Estrutura do projeto (documentação técnica)
+
+*A partir daqui o conteúdo é mais técnico — útil para quem for configurar ou
+dar manutenção no projeto.*
 
 ```
 index.html          → página inicial (escolha entre os 3 formulários)
@@ -125,13 +164,15 @@ painel vai refletir a mudança na próxima atualização automática.
 
 ## Limitações conhecidas
 
-- O envio dos formulários usa `fetch` em modo `no-cors`: o navegador não
-  consegue confirmar se a gravação deu certo (limitação do Google Apps
-  Script), então o formulário assume sucesso se a requisição não falhar
-  por rede. Teste sempre um envio real antes do evento (passo 5).
+- O envio dos formulários usa `fetch` em modo `no-cors` (limitação do Google
+  Apps Script — o navegador não consegue ler a resposta). Para compensar, o
+  site confere sozinho se o registro apareceu na planilha antes de avisar
+  "sucesso" — mas isso ainda depende da planilha estar acessível para
+  leitura pública. Teste sempre um envio real antes do evento (passo 5).
 - A planilha do Google tem um limite prático de algumas dezenas de milhares
   de linhas — mais do que suficiente para um mutirão, mas não use este
   modelo para bases muito grandes.
-- Não há login/senha no painel: qualquer pessoa com o link consegue marcar
-  presença. Para um evento maior, considere não divulgar o link do painel
-  publicamente (ele não faz parte dos QR Codes de inscrição).
+- O código de acesso do painel (`painel.pin`) é uma proteção simples, não
+  criptografia de verdade — qualquer pessoa que abrir o "ver código-fonte"
+  da página consegue encontrá-lo. Serve para evitar acesso casual, não para
+  proteger dados sensíveis de verdade.
