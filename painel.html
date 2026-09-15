@@ -40,6 +40,12 @@
   }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
   @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
+  .gate-wrap {
+    max-width: 380px;
+    margin: 64px auto;
+  }
+  #pin-erro { display: none; }
 </style>
 </head>
 <body>
@@ -56,11 +62,27 @@
 </nav>
 
 <main class="page page--wide">
-  <span class="eyebrow"><span class="live-dot"></span> Atualiza automaticamente</span>
-  <h1>Painel de acompanhamento</h1>
-  <p class="muted">Visão geral dos voluntários inscritos, confirmados e presentes no dia do mutirão.</p>
 
-  <div id="erro-carregamento"></div>
+  <div id="painel-gate" class="gate-wrap">
+    <form id="pin-form" class="card stack">
+      <span class="eyebrow">Acesso restrito</span>
+      <h2>Entrar no painel</h2>
+      <p class="muted">Digite o código de acesso combinado com a organização.</p>
+      <div class="field">
+        <label for="pin-input">Código de acesso</label>
+        <input class="input" type="password" id="pin-input" autocomplete="off">
+      </div>
+      <div id="pin-erro" class="form-status form-status--visible form-status--error">Código incorreto. Tente de novo.</div>
+      <button class="btn btn--primary btn--block" type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <div id="painel-conteudo" hidden>
+    <span class="eyebrow"><span class="live-dot"></span> Atualiza automaticamente</span>
+    <h1>Painel de acompanhamento</h1>
+    <p class="muted">Visão geral dos voluntários inscritos, confirmados e presentes no dia do mutirão.</p>
+
+    <div id="erro-carregamento"></div>
 
   <section class="stat-row">
     <div class="stat-tile">
@@ -131,9 +153,47 @@
       <div class="empty-state" id="tabela-vazia">Nenhum voluntário encontrado com esses filtros.</div>
     </div>
   </section>
+  </div>
 </main>
 
 <script src="config.js"></script>
+<script>
+  // Tela de PIN — mostra o painel só depois de digitar o código certo
+  // (ou se o código já foi validado antes neste navegador).
+  (function () {
+    const pin = (CONFIG.painel && CONFIG.painel.pin) || "";
+    const gate = document.getElementById("painel-gate");
+    const conteudo = document.getElementById("painel-conteudo");
+
+    function liberar() {
+      gate.hidden = true;
+      conteudo.hidden = false;
+    }
+
+    if (!pin || localStorage.getItem("painelPin") === pin) {
+      liberar();
+      return;
+    }
+
+    const form = document.getElementById("pin-form");
+    const input = document.getElementById("pin-input");
+    const erro = document.getElementById("pin-erro");
+
+    form.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      if (input.value === pin) {
+        localStorage.setItem("painelPin", pin);
+        liberar();
+      } else {
+        erro.style.display = "block";
+        input.value = "";
+        input.focus();
+      }
+    });
+
+    input.focus();
+  })();
+</script>
 <script src="js/backend.js"></script>
 <script src="js/dashboard.js"></script>
 </body>

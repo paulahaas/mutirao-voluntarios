@@ -157,4 +157,19 @@ const CONFIG = {
     "Montagem de estruturas": "",
     "Primeiros socorros": "",
   },
+
+  // ================================================================
+  // 9. CÓDIGO DE ACESSO AO PAINEL
+  // ------------------------------------------------------------------
+  // O painel pede esse código antes de mostrar os dados dos
+  // voluntários. IMPORTANTE: isso NÃO é segurança de verdade — o
+  // código fica visível para quem souber olhar o código-fonte da
+  // página. Serve só para impedir que alguém abra o link do painel
+  // por acaso e comece a mexer sem querer. Troque para o código que
+  // preferir (pode ser texto ou números). Deixe "" para desativar
+  // essa tela e liberar o painel direto.
+  // ================================================================
+  painel: {
+    pin: "mutirao2026",
+  },
 };

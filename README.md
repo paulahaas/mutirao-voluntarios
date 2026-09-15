@@ -94,6 +94,11 @@ preencha um envio de teste e confira se a linha apareceu na planilha.
 
 ## 6. Usando o painel no dia do mutirão
 
+O painel pede um **código de acesso** antes de mostrar os dados (definido em
+`config.js` → `painel.pin`, padrão `mutirao2026` — troque para o código que
+preferir). Não é uma senha forte — só evita que alguém abra o link por acaso.
+Depois de digitar certo uma vez, o navegador lembra e não pede de novo.
+
 Abra `painel.html` em um notebook, tablet ou projeção na recepção. Ele:
 
 - Mostra total de inscritos, confirmados e presentes.
@@ -115,6 +120,7 @@ painel vai refletir a mudança na próxima atualização automática.
 | Cursos sugeridos, lista de funções, disponibilidade | `config.js` → `voluntario` |
 | Tipos de parceria / contribuição | `config.js` → `parceiro` / `doador` |
 | Metas e responsáveis por função (painel) | `config.js` → `metasPorFuncao` / `responsaveisPorFuncao` |
+| Código de acesso do painel | `config.js` → `painel.pin` |
 | Cores (tema claro e escuro), tipografia | `assets/styles.css` → bloco `:root` no topo do arquivo |
 
 ## Limitações conhecidas
