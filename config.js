@@ -54,7 +54,7 @@ const CONFIG = {
   // cole aqui a URL final, sem barra no final.
   // Ex: "https://mutirao-voluntarios.vercel.app"
   // ================================================================
-  SITE_BASE_URL: "",
+  SITE_BASE_URL: "https://mutirao-voluntarios.vercel.app",
 
   // ================================================================
   // 4. LISTAS DO FORMULÁRIO "QUERO SER VOLUNTÁRIO"
