@@ -5,7 +5,12 @@
  */
 (function () {
   const inst = CONFIG.instituicao;
-  if (!inst) return;
+  const footerEl = document.querySelector(".site-footer");
+
+  if (!inst || !inst.ativo) {
+    if (footerEl) footerEl.hidden = true;
+    return;
+  }
 
   const logoImg = document.getElementById("footer-logo-img");
   if (inst.logo) {

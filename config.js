@@ -190,6 +190,10 @@ const CONFIG = {
   // texto aparece).
   // ================================================================
   instituicao: {
+    // Deixe "false" para esconder o rodapé inteiro (ainda não temos o
+    // texto/logo definitivos). Troque para "true" quando estiver pronto.
+    ativo: false,
+
     nome: "UniCesumar",
     logo: "", // ex: "assets/logo-instituicao.png"
     descricao:
