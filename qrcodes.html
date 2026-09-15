@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Codes — Mutirão Comunitário</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,640;9..144,680&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  .warning {
+    background: var(--warn-bg);
+    color: var(--warn);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .poster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .poster-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .usage-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .usage-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 0.9rem;
+  }
+  .usage-item strong { display: block; margin-bottom: 4px; }
+
+  @media print {
+    .nav, .no-print, h2, .intro-text, .usage-block { display: none !important; }
+    .poster-grid { grid-template-columns: 1fr; }
+    .poster { break-inside: avoid; page-break-after: always; box-shadow: none; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav no-print">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Mutirão Comunitário</a>
+    <div class="nav-tabs">
+      <a href="index.html">Início</a>
+      <a href="qrcodes.html" aria-current="page">QR Codes</a>
+      <a href="painel.html">Painel</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page page--wide">
+  <span class="eyebrow">Divulgação</span>
+  <h1>QR Codes dos formulários</h1>
+  <p class="muted intro-text">
+    Aponte a câmera para inscrever alguém na hora, ou baixe/imprima estes cartazes
+    para colar no mural, postar nas redes sociais ou enviar por WhatsApp e e-mail.
+  </p>
+
+  <div class="warning" id="aviso-base-url" style="display:none;">
+    ⚠️ O endereço do site ainda não foi configurado em <code>config.js</code> →
+    <code>SITE_BASE_URL</code>. Os QR Codes abaixo estão apontando para
+    <code>localhost</code> e só vão funcionar neste computador. Publique o site
+    e atualize essa variável para gerar QR Codes válidos para divulgação.
+  </div>
+
+  <div class="row no-print" style="margin-bottom: 20px;">
+    <button class="btn btn--pine" onclick="window.print()">🖨️ Imprimir cartazes</button>
+  </div>
+
+  <div class="poster-grid" id="posters"></div>
+
+  <section class="usage-block" style="margin-top: 44px;">
+    <h2>Onde usar</h2>
+    <div class="usage-list">
+      <div class="usage-item"><strong>📍 Cartazes no local</strong>Imprima os 3 cartazes e cole em murais, entrada do evento e pontos de grande circulação.</div>
+      <div class="usage-item"><strong>📱 Redes sociais</strong>Use o print de cada cartaz como post ou story, marcando a organização.</div>
+      <div class="usage-item"><strong>💬 Grupos de WhatsApp</strong>Envie a imagem do cartaz ou o link direto do formulário nos grupos da comunidade.</div>
+      <div class="usage-item"><strong>✉️ E-mail para parceiros</strong>Anexe o cartaz de "Quero ser parceiro" em convites e e-mails para empresas.</div>
+    </div>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script>
+  const formularios = [
+    {
+      id: "voluntario",
+      classe: "poster--voluntario",
+      titulo: "Quero ser voluntário!",
+      chamada: "Aponte a câmera e faça parte do mutirão",
+      pagina: "voluntario.html",
+    },
+    {
+      id: "parceiro",
+      classe: "poster--parceiro",
+      titulo: "Seja um parceiro!",
+      chamada: "Empresas e instituições que querem apoiar o mutirão",
+      pagina: "parceiro.html",
+    },
+    {
+      id: "doador",
+      classe: "poster--doador",
+      titulo: "Quero contribuir!",
+      chamada: "Doe dinheiro, materiais ou alimentos para a ação",
+      pagina: "doador.html",
+    },
+  ];
+
+  const baseUrl = CONFIG.SITE_BASE_URL || window.location.origin + window.location.pathname.replace(/qrcodes\.html$/, "");
+  if (!CONFIG.SITE_BASE_URL) {
+    document.getElementById("aviso-base-url").style.display = "block";
+  }
+
+  const container = document.getElementById("posters");
+
+  formularios.forEach((f) => {
+    const link = baseUrl.replace(/\/$/, "") + "/" + f.pagina;
+
+    const poster = document.createElement("div");
+    poster.className = "poster " + f.classe;
+    poster.innerHTML = `
+      <span class="eyebrow">${CONFIG.evento.nome}</span>
+      <h2>${f.titulo}</h2>
+      <p>${f.chamada}</p>
+      <div class="qr-frame" id="qr-${f.id}"></div>
+      <p class="link-text">${link}</p>
+    `;
+    container.appendChild(poster);
+
+    new QRCode(document.getElementById("qr-" + f.id), {
+      text: link,
+      width: 176,
+      height: 176,
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+  });
+</script>
+</body>
+</html>

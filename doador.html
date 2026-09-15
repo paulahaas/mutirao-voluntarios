@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quero contribuir — Mutirão Comunitário</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,640;9..144,680&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Mutirão Comunitário</a>
+    <div class="nav-tabs">
+      <a href="index.html">Início</a>
+      <a href="qrcodes.html">QR Codes</a>
+      <a href="painel.html">Painel</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <span class="eyebrow">Cadastro de doação</span>
+  <h1>Quero contribuir</h1>
+  <p class="muted">Toda ajuda conta. Preencha os dados abaixo e a organização vai combinar com você a entrega ou coleta da doação.</p>
+
+  <form id="form" class="card stack" novalidate>
+
+    <div class="field">
+      <label for="nome">Nome</label>
+      <input class="input" type="text" id="nome" name="nome" required autocomplete="name">
+    </div>
+
+    <div class="row" style="align-items: flex-start; gap: 16px;">
+      <div class="field" style="flex: 1; min-width: 220px;">
+        <label for="email">E-mail</label>
+        <input class="input" type="email" id="email" name="email" required autocomplete="email">
+      </div>
+      <div class="field" style="flex: 1; min-width: 220px;">
+        <label for="telefone">Telefone</label>
+        <input class="input" type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="tipoContribuicao">Tipo de contribuição</label>
+      <select class="input" id="tipoContribuicao" name="tipoContribuicao" required>
+        <option value="" disabled selected>Selecione um tipo</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="descricao">Descrição da doação</label>
+      <textarea id="descricao" name="descricao" required placeholder="Ex: R$ 100, 20kg de alimentos não perecíveis, 30 latas de tinta..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="observacoes">Observações <span class="hint">(opcional)</span></label>
+      <textarea id="observacoes" name="observacoes"></textarea>
+    </div>
+
+    <button class="btn btn--primary btn--block" type="submit">Enviar doação</button>
+    <div id="status" class="form-status" role="status" aria-live="polite"></div>
+  </form>
+</main>
+
+<script src="config.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/form-common.js"></script>
+<script>
+  const selectTipo = document.getElementById("tipoContribuicao");
+  CONFIG.doador.tiposContribuicao.forEach((t) => {
+    const opt = document.createElement("option");
+    opt.value = t;
+    opt.textContent = t;
+    selectTipo.appendChild(opt);
+  });
+
+  ligarFormulario({
+    sheet: CONFIG.backend.ABA_DOADORES,
+    form: document.getElementById("form"),
+    status: document.getElementById("status"),
+    montarDados: () => {
+      const dados = new FormData(document.getElementById("form"));
+      return {
+        nome: dados.get("nome"),
+        email: dados.get("email"),
+        telefone: dados.get("telefone"),
+        tipoContribuicao: dados.get("tipoContribuicao"),
+        descricao: dados.get("descricao"),
+        observacoes: dados.get("observacoes") || "",
+      };
+    },
+  });
+</script>
+</body>
+</html>

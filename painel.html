@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Mutirão</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,640;9..144,680&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .panel-section { margin-top: 32px; }
+  .panel-section h2 { margin-bottom: 4px; }
+  .panel-section .desc { margin-bottom: 16px; }
+  #aviso-deficit {
+    display: none;
+    background: var(--critical-bg);
+    color: var(--critical);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+  }
+  #erro-carregamento {
+    display: none;
+    background: var(--critical-bg);
+    color: var(--critical);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  #tabela-vazia { display: none; }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 999px;
+    background: var(--good);
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+  @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Mutirão Comunitário</a>
+    <div class="nav-tabs">
+      <a href="index.html">Início</a>
+      <a href="qrcodes.html">QR Codes</a>
+      <a href="painel.html" aria-current="page">Painel</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page page--wide">
+  <span class="eyebrow"><span class="live-dot"></span> Atualiza automaticamente</span>
+  <h1>Painel de acompanhamento</h1>
+  <p class="muted">Visão geral dos voluntários inscritos, confirmados e presentes no dia do mutirão.</p>
+
+  <div id="erro-carregamento"></div>
+
+  <section class="stat-row">
+    <div class="stat-tile">
+      <div class="label">Inscritos</div>
+      <div class="value tabular" id="stat-total">—</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Confirmados</div>
+      <div class="value tabular" id="stat-confirmados">—</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Compareceram</div>
+      <div class="value tabular accent" id="stat-compareceram">—</div>
+    </div>
+  </section>
+
+  <section class="panel-section">
+    <h2>Funções: preenchidas x déficit</h2>
+    <p class="desc muted">Metas e responsáveis por função são definidos em <code>config.js</code>.</p>
+    <div id="aviso-deficit"></div>
+    <div class="card">
+      <div class="role-bar-row" id="funcoes-lista"></div>
+    </div>
+  </section>
+
+  <section class="panel-section">
+    <h2>Registro de presença</h2>
+    <p class="desc muted">Clique nos status para confirmar presença ou marcar falta.</p>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="filters">
+        <div class="field">
+          <label for="filtro-curso">Curso</label>
+          <select class="input" id="filtro-curso">
+            <option value="">Todos</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filtro-disponibilidade">Disponibilidade</label>
+          <select class="input" id="filtro-disponibilidade">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filtro-funcao">Função</label>
+          <select class="input" id="filtro-funcao">
+            <option value="">Todas</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="roster">
+        <thead>
+          <tr>
+            <th>Voluntário</th>
+            <th>Curso</th>
+            <th>Disponibilidade</th>
+            <th>Função</th>
+            <th>Confirmado</th>
+            <th>Presença</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-corpo"></tbody>
+      </table>
+      <div class="empty-state" id="tabela-vazia">Nenhum voluntário encontrado com esses filtros.</div>
+    </div>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

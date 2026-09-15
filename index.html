@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mutirão Comunitário</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,640;9..144,680&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .hero {
+    background: var(--pine);
+    color: var(--ink-on-pine);
+  }
+  .hero-inner {
+    max-width: 1080px;
+    margin-inline: auto;
+    padding: 56px 16px 64px;
+  }
+  .hero .eyebrow { color: var(--ink-on-pine); opacity: 0.75; }
+  .hero h1 { color: var(--ink-on-pine); max-width: 16ch; }
+  .hero p { color: var(--ink-on-pine); opacity: 0.92; max-width: 46ch; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .choice-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .choice-card .tag {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .choice-card h3 { margin: 0; }
+  .choice-card p { margin: 0; font-size: 0.9rem; color: var(--ink-muted); }
+  .choice-card .go { margin-top: auto; font-weight: 700; font-size: 0.86rem; }
+
+  .tag--voluntario { background: var(--good-bg); color: var(--pine-strong); }
+  .tag--parceiro { background: var(--warn-bg); color: var(--brand-strong); }
+  .tag--doador { background: var(--critical-bg); color: var(--brick-strong); }
+
+  .secondary-links {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Mutirão Comunitário</a>
+    <div class="nav-tabs">
+      <a href="index.html" aria-current="page">Início</a>
+      <a href="qrcodes.html">QR Codes</a>
+      <a href="painel.html">Painel</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner stack">
+    <span class="eyebrow" id="evento-org">Grupo 02 — Formulários, QR Codes e Voluntários</span>
+    <h1 id="evento-nome">Mutirão Comunitário</h1>
+    <p id="evento-data">Sábado, 08h às 17h — [defina data e local aqui]</p>
+  </div>
+</header>
+
+<main class="page page--wide">
+  <h2>Como você quer participar?</h2>
+  <p class="muted">Escolha uma das opções abaixo. Leva menos de 2 minutos para se inscrever.</p>
+
+  <div class="cards">
+    <a class="choice-card" href="voluntario.html">
+      <span class="tag tag--voluntario">🙋</span>
+      <h3>Quero ser voluntário</h3>
+      <p>Ajude no dia do mutirão: pintura, organização, logística, recepção e mais.</p>
+      <span class="go">Preencher inscrição →</span>
+    </a>
+    <a class="choice-card" href="parceiro.html">
+      <span class="tag tag--parceiro">🤝</span>
+      <h3>Quero ser parceiro</h3>
+      <p>Empresas e instituições que podem apoiar com recursos, materiais ou divulgação.</p>
+      <span class="go">Cadastrar parceria →</span>
+    </a>
+    <a class="choice-card" href="doador.html">
+      <span class="tag tag--doador">💛</span>
+      <h3>Quero contribuir</h3>
+      <p>Doações em dinheiro, materiais ou alimentos para o dia da ação.</p>
+      <span class="go">Fazer doação →</span>
+    </a>
+  </div>
+
+  <div class="secondary-links">
+    <a class="btn btn--ghost" href="qrcodes.html">Ver QR Codes para divulgação</a>
+    <a class="btn btn--ghost" href="painel.html">Abrir painel de acompanhamento</a>
+  </div>
+</main>
+
+<script src="config.js"></script>
+<script>
+  document.getElementById("evento-org").textContent = CONFIG.evento.organizacao;
+  document.getElementById("evento-nome").textContent = CONFIG.evento.nome;
+  document.getElementById("evento-data").textContent = CONFIG.evento.dataLocal;
+</script>
+</body>
+</html>
