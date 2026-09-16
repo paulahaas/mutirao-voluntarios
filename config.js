@@ -80,19 +80,26 @@ const CONFIG = {
       "Primeiros socorros",
     ],
 
-    // Sugestões de curso/área (aparecem como autocomplete, mas o campo
-    // aceita qualquer texto digitado).
+    // Lista de cursos/área de formação (aparece como uma lista fixa no
+    // formulário — evita que a mesma pessoa/curso apareça de formas
+    // diferentes na planilha, tipo "Engenharia Civil" e "eng civil").
+    // Uma opção "Outro" com campo de texto livre é adicionada
+    // automaticamente no final, não precisa incluir aqui.
     cursosSugeridos: [
       "Administração",
-      "Arquitetura",
+      "Análise e Desenvolvimento de Sistemas",
+      "Arquitetura e Urbanismo",
+      "Ciência de Dados",
       "Direito",
-      "Enfermagem",
-      "Engenharia Civil",
-      "Medicina",
-      "Pedagogia",
+      "Gestão Comercial",
+      "Gestão de Negócios Imobiliários",
+      "Gestão de Recursos Humanos",
+      "Marketing",
+      "Nutrição",
+      "Produção Multimídia com Ênfase em Animação e Audiovisual",
       "Psicologia",
-      "Serviço Social",
-      "Outro / Não se aplica",
+      "Segurança Cibernética",
+      "UX Design",
     ],
   },
 

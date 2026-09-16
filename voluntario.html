@@ -42,8 +42,14 @@
 
     <div class="field">
       <label for="curso">Curso / área de formação</label>
-      <input class="input" type="text" id="curso" name="curso" list="lista-cursos" placeholder="Ex: Enfermagem, Engenharia Civil..." required>
-      <datalist id="lista-cursos"></datalist>
+      <select class="input" id="curso" name="curso" required>
+        <option value="" disabled selected>Selecione um curso</option>
+      </select>
+    </div>
+
+    <div class="field" id="campo-outro-curso" style="display:none;">
+      <label for="outroCurso">Qual curso?</label>
+      <input class="input" type="text" id="outroCurso" name="outroCurso" placeholder="Digite seu curso">
     </div>
 
     <div class="row" style="align-items: flex-start; gap: 16px;">
@@ -133,12 +139,22 @@
     campoOutraFuncao.style.display = selectFuncao.value === "Outra" ? "flex" : "none";
   });
 
-  // Preenche sugestões de curso
-  const listaCursos = document.getElementById("lista-cursos");
+  // Preenche a lista de cursos a partir do config.js
+  const selectCurso = document.getElementById("curso");
   CONFIG.voluntario.cursosSugeridos.forEach((c) => {
     const opt = document.createElement("option");
     opt.value = c;
-    listaCursos.appendChild(opt);
+    opt.textContent = c;
+    selectCurso.appendChild(opt);
+  });
+  const optOutroCurso = document.createElement("option");
+  optOutroCurso.value = "Outro";
+  optOutroCurso.textContent = "Outro (descrever abaixo)";
+  selectCurso.appendChild(optOutroCurso);
+
+  const campoOutroCurso = document.getElementById("campo-outro-curso");
+  selectCurso.addEventListener("change", () => {
+    campoOutroCurso.style.display = selectCurso.value === "Outro" ? "flex" : "none";
   });
 
   // Preenche opções de disponibilidade (checkboxes múltiplos)
@@ -166,9 +182,14 @@
         funcao = dados.get("outraFuncao");
       }
 
+      let curso = dados.get("curso");
+      if (curso === "Outro" && dados.get("outroCurso")) {
+        curso = dados.get("outroCurso");
+      }
+
       return {
         nome: dados.get("nome"),
-        curso: dados.get("curso"),
+        curso,
         email: dados.get("email"),
         telefone: dados.get("telefone"),
         disponibilidade: disponibilidade.join(", "),
