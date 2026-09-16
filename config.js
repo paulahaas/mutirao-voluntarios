@@ -176,11 +176,11 @@ const CONFIG = {
     // texto/logo definitivos). Troque para "true" quando estiver pronto.
     ativo: false,
 
-    nome: "UNICESUSC",
+    nome: "UniCesusc",
     logo: "", // ex: "assets/logo-instituicao.png"
     descricao:
       "Este projeto é uma iniciativa de extensão do Grupo 02 da " +
-      "UNICESUSC, criada para apoiar a organização de um mutirão " +
+      "UniCesusc, criada para apoiar a organização de um mutirão " +
       "comunitário. Se você recebeu este link de alguém, pode ficar " +
       "tranquilo: é um projeto real, ligado à instituição de ensino.",
     // Opcional: link para o Instagram/site da instituição ou do grupo,
