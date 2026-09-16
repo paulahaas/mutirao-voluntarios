@@ -13,15 +13,6 @@
   .panel-section { margin-top: 32px; }
   .panel-section h2 { margin-bottom: 4px; }
   .panel-section .desc { margin-bottom: 16px; }
-  #aviso-deficit {
-    display: none;
-    background: var(--critical-bg);
-    color: var(--critical);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    font-size: 0.9rem;
-    margin-bottom: 14px;
-  }
   #erro-carregamento {
     display: none;
     background: var(--critical-bg);
@@ -63,26 +54,11 @@
 
 <main class="page page--wide">
 
-  <div id="painel-gate" class="gate-wrap">
-    <form id="pin-form" class="card stack">
-      <span class="eyebrow">Acesso restrito</span>
-      <h2>Entrar no painel</h2>
-      <p class="muted">Digite o código de acesso combinado com a organização.</p>
-      <div class="field">
-        <label for="pin-input">Código de acesso</label>
-        <input class="input" type="password" id="pin-input" autocomplete="off">
-      </div>
-      <div id="pin-erro" class="form-status form-status--visible form-status--error">Código incorreto. Tente de novo.</div>
-      <button class="btn btn--primary btn--block" type="submit">Entrar</button>
-    </form>
-  </div>
+  <span class="eyebrow"><span class="live-dot"></span> Atualiza automaticamente</span>
+  <h1>Painel de acompanhamento</h1>
+  <p class="muted">Visão geral dos voluntários inscritos, confirmados e presentes no dia do mutirão.</p>
 
-  <div id="painel-conteudo" hidden>
-    <span class="eyebrow"><span class="live-dot"></span> Atualiza automaticamente</span>
-    <h1>Painel de acompanhamento</h1>
-    <p class="muted">Visão geral dos voluntários inscritos, confirmados e presentes no dia do mutirão.</p>
-
-    <div id="erro-carregamento"></div>
+  <div id="erro-carregamento"></div>
 
   <section class="stat-row">
     <div class="stat-tile">
@@ -99,10 +75,24 @@
     </div>
   </section>
 
+  <div id="painel-gate" class="gate-wrap">
+    <form id="pin-form" class="card stack">
+      <span class="eyebrow">Acesso restrito</span>
+      <h2>Ver mais detalhes</h2>
+      <p class="muted">Os números acima são públicos. Pra ver a lista de voluntários e os detalhes por função, digite o código de acesso combinado com a organização.</p>
+      <div class="field">
+        <label for="pin-input">Código de acesso</label>
+        <input class="input" type="password" id="pin-input" autocomplete="off">
+      </div>
+      <div id="pin-erro" class="form-status form-status--visible form-status--error">Código incorreto. Tente de novo.</div>
+      <button class="btn btn--primary btn--block" type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <div id="painel-conteudo" hidden>
   <section class="panel-section">
-    <h2>Funções: preenchidas x déficit</h2>
-    <p class="desc muted">Metas e responsáveis por função são definidos em <code>config.js</code>.</p>
-    <div id="aviso-deficit"></div>
+    <h2>Funções: quantos já se inscreveram</h2>
+    <p class="desc muted">Sem limite por função — quanto mais gente, melhor. Responsáveis definidos em <code>config.js</code>.</p>
     <div class="card">
       <div class="role-bar-row" id="funcoes-lista"></div>
     </div>
@@ -110,7 +100,7 @@
 
   <section class="panel-section">
     <h2>Registro de presença</h2>
-    <p class="desc muted">Clique nos status para confirmar presença ou marcar falta.</p>
+    <p class="desc muted">Clique nos status para confirmar presença ou marcar falta. No dia do evento, considere usar a <a href="checkin.html">página de check-in</a> — é mais rápida pra marcar presença em massa na entrada.</p>
 
     <div class="card" style="margin-bottom: 16px;">
       <div class="filters">

@@ -124,25 +124,7 @@ const CONFIG = {
   },
 
   // ================================================================
-  // 7. META DE PESSOAS POR FUNÇÃO — usado no painel para calcular
-  // déficit ("precisa de mais gente em: X, Y"). Ajuste os números para
-  // o tamanho real do seu mutirão. Funções fora desta lista ainda
-  // aparecem no painel, só não entram no cálculo de déficit.
-  // ================================================================
-  metasPorFuncao: {
-    "Pintura": 8,
-    "Organização e limpeza": 6,
-    "Logística e transporte": 4,
-    "Recepção e cadastro": 3,
-    "Comunicação e redes sociais": 2,
-    "Cozinha e alimentação": 5,
-    "Cuidado com crianças": 3,
-    "Montagem de estruturas": 6,
-    "Primeiros socorros": 2,
-  },
-
-  // ================================================================
-  // 8. RESPONSÁVEL POR CADA FUNÇÃO — quem da organização coordena cada
+  // 7. RESPONSÁVEL POR CADA FUNÇÃO — quem da organização coordena cada
   // atividade no dia do mutirão. Aparece no painel ao lado da barra de
   // preenchimento de cada função. Deixe "" se ainda não tiver definido.
   // ================================================================
@@ -159,7 +141,7 @@ const CONFIG = {
   },
 
   // ================================================================
-  // 9. CÓDIGO DE ACESSO AO PAINEL
+  // 8. CÓDIGO DE ACESSO AO PAINEL
   // ------------------------------------------------------------------
   // O painel pede esse código antes de mostrar os dados dos
   // voluntários. IMPORTANTE: isso NÃO é segurança de verdade — o
@@ -174,7 +156,7 @@ const CONFIG = {
   },
 
   // ================================================================
-  // 10. SOBRE NÓS / INSTITUIÇÃO — aparece num rodapé em todas as
+  // 9. SOBRE NÓS / INSTITUIÇÃO — aparece num rodapé em todas as
   // páginas, inclusive nas que o QR Code leva direto (voluntário,
   // parceiro, doador). Existe porque quem recebe o link encaminhado
   // por terceiros pode não ter contexto nenhum sobre o projeto — essa

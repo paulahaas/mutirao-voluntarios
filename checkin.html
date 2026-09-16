@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check-in — Mutirão Comunitário</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  #erro-carregamento {
+    display: none;
+    background: var(--critical-bg);
+    color: var(--critical);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  #vazio { display: none; }
+  .contador {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Mutirão Comunitário</a>
+    <div class="nav-tabs">
+      <a href="index.html">Início</a>
+      <a href="qrcodes.html">QR Codes</a>
+      <a href="painel.html">Painel</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <span class="eyebrow">Check-in do dia</span>
+  <h1>Marcar presença</h1>
+  <p class="muted">Encontre o nome na lista abaixo e toque para marcar presença. Pode ser usado pela própria pessoa ou por quem estiver na recepção.</p>
+
+  <div class="field" style="margin-bottom: 20px;">
+    <label for="busca">Buscar pelo nome</label>
+    <input class="input" type="text" id="busca" placeholder="Digite o nome...">
+  </div>
+
+  <div id="erro-carregamento"></div>
+  <p class="contador" id="contador"></p>
+
+  <div class="stack" id="lista-checkin"></div>
+  <div class="empty-state" id="vazio">Nenhum voluntário encontrado.</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><img id="footer-logo-img" hidden></div>
+    <div class="footer-text">
+      <span class="eyebrow">Sobre nós</span>
+      <p id="footer-descricao"></p>
+      <a id="footer-link" href="#" target="_blank" rel="noopener" hidden>Saiba mais →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/checkin.js"></script>
+</body>
+</html>

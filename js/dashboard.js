@@ -50,53 +50,45 @@ function renderizarIndicadores() {
   document.getElementById("stat-compareceram").textContent = compareceram;
 }
 
-// ---------- Funções: preenchidas x déficit ----------
+// ---------- Funções: quantos já se inscreveram ----------
+// Sem limite/meta por função de propósito — quanto mais gente se
+// inscrever em qualquer função, melhor. A barra é só uma comparação
+// visual entre as funções, não uma "vaga cheia".
 function renderizarFuncoes() {
-  const metas = CONFIG.metasPorFuncao;
   const responsaveis = CONFIG.responsaveisPorFuncao || {};
   const contagem = {};
   voluntarios.forEach((v) => {
-    contagem[v.Funcao] = (contagem[v.Funcao] || 0) + 1;
+    if (v.Funcao) contagem[v.Funcao] = (contagem[v.Funcao] || 0) + 1;
   });
 
-  const funcoes = Object.keys(metas).map((nome) => ({
+  // Mostra as funções sugeridas em config.js (mesmo com 0 inscritos)
+  // mais qualquer função extra que apareça nos dados (ex: "Outra").
+  const nomes = new Set([...(CONFIG.voluntario.funcoes || []), ...Object.keys(contagem)]);
+
+  const funcoes = [...nomes].map((nome) => ({
     nome,
-    atual: contagem[nome] || 0,
-    meta: metas[nome],
+    total: contagem[nome] || 0,
     responsavel: responsaveis[nome] || "—",
   }));
-  // Maior déficit primeiro (quem precisa de mais gente aparece no topo)
-  funcoes.sort((a, b) => (b.meta - b.atual) - (a.meta - a.atual));
+  funcoes.sort((a, b) => b.total - a.total);
 
+  const maior = Math.max(1, ...funcoes.map((f) => f.total));
   const wrap = document.getElementById("funcoes-lista");
   wrap.innerHTML = "";
 
-  const deficits = [];
-
   funcoes.forEach((f) => {
-    const pct = Math.min(100, Math.round((f.atual / f.meta) * 100));
-    const faltam = f.meta - f.atual;
-    if (faltam > 0) deficits.push(f.nome);
-
+    const pct = Math.round((f.total / maior) * 100);
     const div = document.createElement("div");
     div.className = "role-bar";
     div.innerHTML = `
       <div class="top">
         <span><strong>${f.nome}</strong> <span class="muted">· responsável: ${f.responsavel}</span></span>
-        <span class="tabular">${f.atual}/${f.meta}</span>
+        <span class="tabular">${f.total} ${f.total === 1 ? "inscrito" : "inscritos"}</span>
       </div>
-      <div class="track"><div class="fill ${faltam > 0 ? "deficit" : ""}" style="width:${pct}%"></div></div>
+      <div class="track"><div class="fill" style="width:${pct}%"></div></div>
     `;
     wrap.appendChild(div);
   });
-
-  const avisoDeficit = document.getElementById("aviso-deficit");
-  if (deficits.length) {
-    avisoDeficit.style.display = "block";
-    avisoDeficit.innerHTML = "⚠️ Precisa de mais gente em: <strong>" + deficits.join(", ") + "</strong>";
-  } else {
-    avisoDeficit.style.display = "none";
-  }
 }
 
 // ---------- Filtros ----------

@@ -2,8 +2,10 @@
  * BACKEND DO MUTIRÃO — Google Apps Script
  * ------------------------------------------------------------------
  * Este script recebe os envios dos formulários (voluntário, parceiro,
- * doador) e as atualizações de presença feitas no painel, e grava tudo
- * na planilha do Google Sheets a que ele está vinculado.
+ * doador) e as atualizações de presença feitas no painel/check-in, e
+ * grava tudo na planilha do Google Sheets a que ele está vinculado.
+ * Também manda um e-mail de confirmação pra quem se inscreve e avisa
+ * a organização quando chega uma doação em dinheiro.
  *
  * COMO INSTALAR (passo a passo completo também está no README.md):
  *   1. Crie uma planilha no Google Sheets com 3 abas chamadas
@@ -11,10 +13,12 @@
  *      primeira linha de cabeçalhos indicada abaixo.
  *   2. Na planilha, vá em Extensões → Apps Script.
  *   3. Apague o conteúdo padrão e cole todo este arquivo.
- *   4. Clique em Implantar → Nova implantação → tipo "Web app".
+ *   4. Troque EMAIL_ORGANIZACAO abaixo pelo e-mail que deve receber o
+ *      aviso de doação em dinheiro.
+ *   5. Clique em Implantar → Nova implantação → tipo "Web app".
  *      - Executar como: Eu (sua conta)
  *      - Quem pode acessar: Qualquer pessoa
- *   5. Copie a URL gerada e cole em config.js → backend.APPS_SCRIPT_URL
+ *   6. Copie a URL gerada e cole em config.js → backend.APPS_SCRIPT_URL
  *
  * CABEÇALHOS ESPERADOS (linha 1 de cada aba):
  *   voluntarios: ID | Timestamp | Nome | Curso | Email | Telefone |
@@ -26,6 +30,10 @@
  *                TipoContribuicao | Descricao | Observacoes
  * ------------------------------------------------------------------
  */
+
+// E-mail da organização que recebe o aviso de "nova doação em
+// dinheiro". Troque pelo e-mail real da equipe.
+const EMAIL_ORGANIZACAO = "SUBSTITUA_PELO_EMAIL_DA_ORGANIZACAO@exemplo.com";
 
 function doPost(e) {
   try {
@@ -39,6 +47,8 @@ function doPost(e) {
 
     if (body.action === "create") {
       sheet.appendRow(buildRow(body.sheet, body.data));
+      enviarConfirmacao(body.sheet, body.data);
+      notificarDoacaoDinheiro(body.sheet, body.data);
       return jsonOut({ ok: true });
     }
 
@@ -73,6 +83,69 @@ function buildRow(sheetName, d) {
   }
 
   throw new Error("Aba sem mapeamento de colunas: " + sheetName);
+}
+
+// E-mail automático de confirmação pra quem preencheu o formulário.
+// Se o envio de e-mail falhar por qualquer motivo, não interrompe o
+// cadastro — a linha já foi gravada na planilha de qualquer jeito.
+function enviarConfirmacao(sheetName, d) {
+  if (!d.email) return;
+
+  let assunto = "";
+  let corpo = "";
+
+  if (sheetName === "voluntarios") {
+    assunto = "Recebemos sua inscrição de voluntário!";
+    corpo =
+      "Oi " + d.nome + ",\n\n" +
+      "Recebemos sua inscrição para o mutirão (função de interesse: " + d.funcao + "). " +
+      "A organização vai entrar em contato para confirmar sua participação.\n\n" +
+      "Obrigado por fazer parte!";
+  } else if (sheetName === "parceiros") {
+    assunto = "Recebemos seu cadastro de parceria!";
+    corpo =
+      "Oi " + d.responsavel + ",\n\n" +
+      "Recebemos o cadastro de parceria da empresa " + d.empresa + ". " +
+      "A organização vai entrar em contato em breve para combinar os detalhes.\n\n" +
+      "Obrigado pelo apoio!";
+  } else if (sheetName === "doadores") {
+    assunto = "Recebemos sua doação!";
+    corpo =
+      "Oi " + d.nome + ",\n\n" +
+      "Recebemos o registro da sua doação (" + d.tipoContribuicao + "). " +
+      "A organização vai entrar em contato para combinar a entrega ou coleta.\n\n" +
+      "Obrigado por contribuir!";
+  } else {
+    return;
+  }
+
+  try {
+    MailApp.sendEmail(d.email, assunto, corpo);
+  } catch (erro) {
+    // Ignorado de propósito — falha no e-mail não deve derrubar o cadastro.
+  }
+}
+
+// Avisa a organização por e-mail quando chega uma doação em DINHEIRO
+// especificamente (não pra materiais/alimentos/etc — só pra ter
+// noção rápida de doações financeiras).
+function notificarDoacaoDinheiro(sheetName, d) {
+  if (sheetName !== "doadores") return;
+  if (String(d.tipoContribuicao) !== "Dinheiro") return;
+  if (!EMAIL_ORGANIZACAO || EMAIL_ORGANIZACAO.indexOf("SUBSTITUA") > -1) return;
+
+  const corpo =
+    "Nova doação em dinheiro registrada!\n\n" +
+    "Nome: " + d.nome + "\n" +
+    "E-mail: " + d.email + "\n" +
+    "Telefone: " + d.telefone + "\n" +
+    "Descrição: " + d.descricao;
+
+  try {
+    MailApp.sendEmail(EMAIL_ORGANIZACAO, "Nova doação em dinheiro — Mutirão", corpo);
+  } catch (erro) {
+    // Ignorado de propósito.
+  }
 }
 
 // Localiza a linha pelo ID (coluna A) e atualiza Confirmado e/ou Presenca.
