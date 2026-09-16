@@ -32,8 +32,8 @@
  */
 
 // E-mail da organização que recebe o aviso de "nova doação em
-// dinheiro". Troque pelo e-mail real da equipe.
-const EMAIL_ORGANIZACAO = "SUBSTITUA_PELO_EMAIL_DA_ORGANIZACAO@exemplo.com";
+// dinheiro". Troque pelo e-mail real da equipe se não for este.
+const EMAIL_ORGANIZACAO = "phaas2007@gmail.com";
 
 function doPost(e) {
   try {
