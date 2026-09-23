@@ -13,11 +13,42 @@
   .hero {
     background: var(--pine);
     color: var(--ink-on-pine);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Manchas de tinta — ecoam o conceito "cor que transforma" da marca
+     Floripa + Cor sem depender de imagens. Puramente decorativas. */
+  .hero .blob {
+    position: absolute;
+    filter: blur(2px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .hero .blob--laranja {
+    width: 260px; height: 220px;
+    right: -60px; top: -70px;
+    background: var(--brand);
+    border-radius: 62% 38% 55% 45% / 45% 55% 45% 55%;
+  }
+  .hero .blob--vermelho {
+    width: 180px; height: 170px;
+    right: 100px; bottom: -90px;
+    background: var(--brick);
+    border-radius: 40% 60% 65% 35% / 55% 40% 60% 45%;
+    opacity: 0.4;
+  }
+  .hero .blob--teal {
+    width: 140px; height: 140px;
+    right: -30px; bottom: 20px;
+    background: var(--teal);
+    border-radius: 55% 45% 40% 60% / 60% 50% 50% 40%;
+    opacity: 0.35;
   }
   .hero-inner {
     max-width: 1080px;
     margin-inline: auto;
     padding: 56px 16px 64px;
+    position: relative;
   }
   .hero .eyebrow { color: var(--ink-on-pine); opacity: 0.75; }
   .hero h1 { color: var(--ink-on-pine); max-width: 16ch; }
@@ -59,6 +90,19 @@
     display: flex; flex-wrap: wrap; gap: 12px;
     margin-top: 40px;
   }
+
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .section-title .plus {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--brand);
+    line-height: 1;
+  }
 </style>
 </head>
 <body>
@@ -75,6 +119,9 @@
 </nav>
 
 <header class="hero">
+  <span class="blob blob--laranja" aria-hidden="true"></span>
+  <span class="blob blob--vermelho" aria-hidden="true"></span>
+  <span class="blob blob--teal" aria-hidden="true"></span>
   <div class="hero-inner stack">
     <span class="eyebrow" id="evento-org">Grupo 02 — Formulários, QR Codes e Voluntários</span>
     <h1 id="evento-nome">Mutirão Comunitário</h1>
@@ -83,7 +130,7 @@
 </header>
 
 <main class="page page--wide">
-  <h2>Como você quer participar?</h2>
+  <h2 class="section-title"><span class="plus" aria-hidden="true">+</span> Como você quer participar?</h2>
   <p class="muted">Escolha uma das opções abaixo. Leva menos de 2 minutos para se inscrever.</p>
 
   <div class="cards">
