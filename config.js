@@ -185,16 +185,19 @@ const CONFIG = {
   // texto aparece).
   // ================================================================
   instituicao: {
-    // Deixe "false" para esconder o rodapé inteiro (ainda não temos o
-    // texto/logo definitivos). Troque para "true" quando estiver pronto.
-    ativo: false,
+    // Deixe "false" para esconder o rodapé inteiro. Troque para
+    // "true" quando estiver pronto.
+    ativo: true,
 
-    nome: "UniCesusc",
-    logo: "", // ex: "assets/logo-instituicao.png"
+    nome: "Floripa + Cor",
+    // Logo extraída do material de marca (não havia versão isolada em
+    // vetor). Troque pelo arquivo oficial da UniCesusc se/quando tiver
+    // um separado — ex: "assets/logo-unicesusc.png".
+    logo: "assets/logo-floripa-cor.png",
     descricao:
-      "Este projeto é uma iniciativa de extensão do Grupo 02 da " +
-      "UniCesusc, criada para apoiar a organização de um mutirão " +
-      "comunitário. Se você recebeu este link de alguém, pode ficar " +
+      "Este projeto é uma iniciativa de extensão do Grupo 02, ligada " +
+      "à disciplina R+Cidades da UniCesusc e ao projeto Floripa + Cor " +
+      "na Comunidade. Se você recebeu este link de alguém, pode ficar " +
       "tranquilo: é um projeto real, ligado à instituição de ensino.",
     // Opcional: link para o Instagram/site da instituição ou do grupo,
     // pra quem quiser confirmar que o projeto existe de verdade antes
