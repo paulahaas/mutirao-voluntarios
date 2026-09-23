@@ -199,6 +199,9 @@ a { color: var(--pine-strong); }
   flex-wrap: wrap;
 }
 .nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.05rem;
@@ -206,6 +209,13 @@ a { color: var(--pine-strong); }
   text-decoration: none;
   margin-right: auto;
   white-space: nowrap;
+}
+.nav-brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex: none;
 }
 .nav-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
 .nav-tabs a {
