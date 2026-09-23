@@ -105,14 +105,20 @@ const CONFIG = {
 
   // ================================================================
   // 5. LISTAS DO FORMULÁRIO "QUERO SER PARCEIRO"
+  // ------------------------------------------------------------------
+  // A pessoa pode marcar mais de um tipo de apoio (ex: uma loja de
+  // tintas pode oferecer tanto "Tintas e insumos" quanto "Logística").
   // ================================================================
   parceiro: {
-    tiposParceria: [
-      "Financeira",
-      "Material (doação de itens)",
-      "Divulgação",
-      "Mão de obra / voluntariado da equipe",
-      "Espaço / infraestrutura",
+    tiposApoio: [
+      "Tintas e insumos",
+      "Ferramentas",
+      "Materiais de proteção",
+      "Impressão",
+      "Comunicação",
+      "Recursos financeiros",
+      "Logística",
+      "Estrutura",
       "Outro",
     ],
   },

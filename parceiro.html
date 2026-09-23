@@ -7,7 +7,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -57,15 +57,19 @@
     </div>
 
     <div class="field">
-      <label for="tipoParceria">Tipo de parceria</label>
-      <select class="input" id="tipoParceria" name="tipoParceria" required>
-        <option value="" disabled selected>Selecione um tipo</option>
-      </select>
+      <label>Como sua empresa/instituição pode apoiar?</label>
+      <span class="hint">Pode marcar mais de uma opção.</span>
+      <div class="choice-grid" id="apoio-grid"></div>
+    </div>
+
+    <div class="field" id="campo-outro-apoio" style="display:none;">
+      <label for="outroApoio">Qual tipo de apoio?</label>
+      <input class="input" type="text" id="outroApoio" name="outroApoio" placeholder="Descreva o tipo de apoio">
     </div>
 
     <div class="field">
-      <label for="descricao">O que sua empresa/instituição pode oferecer?</label>
-      <textarea id="descricao" name="descricao" required placeholder="Ex: doação de 50L de tinta, transporte no dia, divulgação nas redes sociais..."></textarea>
+      <label for="descricao">Detalhes do apoio oferecido</label>
+      <textarea id="descricao" name="descricao" required placeholder="Ex: 50L de tinta disponíveis, caminhão para transporte no dia, contatos de divulgação..."></textarea>
     </div>
 
     <div class="field">
@@ -94,12 +98,19 @@
 <script src="js/backend.js"></script>
 <script src="js/form-common.js"></script>
 <script>
-  const selectTipo = document.getElementById("tipoParceria");
-  CONFIG.parceiro.tiposParceria.forEach((t) => {
-    const opt = document.createElement("option");
-    opt.value = t;
-    opt.textContent = t;
-    selectTipo.appendChild(opt);
+  // Preenche o checklist de tipos de apoio (múltipla escolha) + "Outro"
+  const gridApoio = document.getElementById("apoio-grid");
+  CONFIG.parceiro.tiposApoio.forEach((t) => {
+    const label = document.createElement("label");
+    label.className = "choice";
+    label.innerHTML = `<input type="checkbox" name="tipoApoio" value="${t}"><span>${t}</span>`;
+    gridApoio.appendChild(label);
+  });
+
+  const campoOutroApoio = document.getElementById("campo-outro-apoio");
+  gridApoio.addEventListener("change", () => {
+    const outroMarcado = gridApoio.querySelector('input[value="Outro"]').checked;
+    campoOutroApoio.style.display = outroMarcado ? "flex" : "none";
   });
 
   ligarFormulario({
@@ -107,13 +118,23 @@
     form: document.getElementById("form"),
     status: document.getElementById("status"),
     montarDados: () => {
-      const dados = new FormData(document.getElementById("form"));
+      const form = document.getElementById("form");
+      const dados = new FormData(form);
+
+      let tiposApoio = Array.from(
+        form.querySelectorAll('input[name="tipoApoio"]:checked')
+      ).map((el) => el.value);
+      if (tiposApoio.includes("Outro") && dados.get("outroApoio")) {
+        tiposApoio = tiposApoio.filter((t) => t !== "Outro");
+        tiposApoio.push(dados.get("outroApoio"));
+      }
+
       return {
         empresa: dados.get("empresa"),
         responsavel: dados.get("responsavel"),
         email: dados.get("email"),
         telefone: dados.get("telefone"),
-        tipoParceria: dados.get("tipoParceria"),
+        tipoParceria: tiposApoio.join(", "),
         descricao: dados.get("descricao"),
         observacoes: dados.get("observacoes") || "",
       };

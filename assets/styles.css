@@ -1,53 +1,57 @@
 /**
  * SISTEMA VISUAL — Mutirão Comunitário
  * ------------------------------------------------------------------
- * Conceito: quadro de mutirão / ficha de inscrição. Papel kraft quente,
- * verde-pinho para estrutura (cabeçalhos, navegação) e âmbar (cor de
- * colete de sinalização) como cor de ação/CTA.
+ * Identidade oficial "Floripa + Cor": 4 cores de tinta (vermelho,
+ * azul-petróleo, laranja, azul profundo), cada uma representando uma
+ * frente do projeto — voluntário, parceiro, doador e check-in.
  *
  * COMO TROCAR AS CORES: edite só os valores dentro de `:root` (tema
- * claro) e dos dois blocos marcados "TEMA ESCURO" logo abaixo. Não é
- * necessário mexer no resto do arquivo — todo o site usa essas
- * variáveis (var(--nome)).
+ * claro) e dos dois blocos marcados "TEMA ESCURO" logo abaixo. Os
+ * nomes das variáveis (--pine, --brick...) ficaram do sistema
+ * anterior por simplicidade de código, mas os VALORES já são as
+ * cores oficiais da marca — não precisa mexer no resto do arquivo,
+ * todo o site usa essas variáveis (var(--nome)).
  * ------------------------------------------------------------------
  */
 
 /* ============ 1. TOKENS — TEMA CLARO (padrão) ============ */
 :root {
   /* Superfícies */
-  --paper: #f2efdf;        /* fundo geral — papel kraft claro */
-  --surface: #fffdf7;      /* cartões, inputs, fichas */
-  --surface-2: #eae5cf;    /* faixas alternadas, campos desabilitados */
-  --line: #d9d2b3;         /* bordas e divisórias */
+  --paper: #f4f1e9;        /* fundo geral — papel claro e neutro */
+  --surface: #ffffff;      /* cartões, inputs, fichas */
+  --surface-2: #e9e4d6;    /* faixas alternadas, campos desabilitados */
+  --line: #d8d1bd;         /* bordas e divisórias */
 
   /* Texto */
-  --ink: #202b21;          /* texto principal — preto-pinho */
-  --ink-muted: #5c6553;    /* texto secundário */
-  --ink-on-brand: #26170a; /* texto sobre fundo âmbar */
-  --ink-on-pine: #f4f1e2;  /* texto sobre fundo verde-pinho */
+  --ink: #1c2430;          /* texto principal — quase-preto azulado */
+  --ink-muted: #5c6470;    /* texto secundário */
+  --ink-on-brand: #fffaf3; /* texto sobre fundo laranja */
+  --ink-on-pine: #ffffff;  /* texto sobre fundo azul profundo */
 
-  /* Marca */
-  --brand: #e2891f;        /* âmbar — botões primários, CTA, destaque */
-  --brand-strong: #b5670f; /* hover/active do âmbar */
-  --pine: #2f5d4a;         /* verde-pinho — navegação, cabeçalhos */
-  --pine-strong: #223f32;  /* hover/active do verde-pinho */
-  --brick: #a5432c;        /* terracota — usado no cartaz de "Doador" */
-  --brick-strong: #832f1e;
+  /* Marca — Floripa + Cor */
+  --brand: #e85425;        /* laranja — botões primários, CTA, destaque */
+  --brand-strong: #b53f18; /* hover/active do laranja */
+  --pine: #004aad;         /* azul profundo — navegação, cabeçalhos, cartaz "Voluntário" */
+  --pine-strong: #003580;  /* hover/active do azul profundo */
+  --brick: #d82424;        /* vermelho — cartaz "Doador" */
+  --brick-strong: #a81b1b;
+  --teal: #2381a1;         /* azul-petróleo — cartaz "Check-in" */
+  --teal-strong: #1a6480;
 
   /* Estados semânticos (independentes da marca) */
   --good: #2e7d5b;         /* confirmado / compareceu */
   --good-bg: #e3f0e6;
-  --warn: #b8860b;         /* pendente / aguardando */
-  --warn-bg: #f6eed7;
-  --critical: #a5342a;     /* faltou / déficit */
-  --critical-bg: #f5e2dd;
+  --warn: #c99a2e;         /* pendente / aguardando */
+  --warn-bg: #f7f0dc;
+  --critical: #c23a2e;     /* faltou */
+  --critical-bg: #f7e2de;
 
   /* Sombra e foco */
-  --shadow: 0 1px 2px rgba(32, 43, 33, 0.08), 0 6px 16px rgba(32, 43, 33, 0.08);
-  --focus-ring: 0 0 0 3px rgba(226, 137, 31, 0.45);
+  --shadow: 0 1px 2px rgba(28, 36, 48, 0.08), 0 6px 16px rgba(28, 36, 48, 0.08);
+  --focus-ring: 0 0 0 3px rgba(232, 84, 37, 0.4);
 
-  --radius: 14px;
-  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-sm: 10px;
 
   color-scheme: light;
 }
@@ -55,28 +59,30 @@
 /* ============ TEMA ESCURO — segue o SO ("sistema") ============ */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #1b2119;
-    --surface: #222a20;
-    --surface-2: #2b3427;
-    --line: #3c4636;
+    --paper: #171c24;
+    --surface: #212833;
+    --surface-2: #2a323e;
+    --line: #3a4453;
 
-    --ink: #ecead9;
-    --ink-muted: #a9b09a;
-    --ink-on-brand: #1c1006;
-    --ink-on-pine: #eef1e4;
+    --ink: #f0ede4;
+    --ink-muted: #a8b0bd;
+    --ink-on-brand: #241005;
+    --ink-on-pine: #f0ede4;
 
-    --brand: #f0a23d;
-    --brand-strong: #f6bd6f;
-    --pine: #5c9a80;
-    --pine-strong: #83bda2;
-    --brick: #d97a5c;
-    --brick-strong: #e69a80;
+    --brand: #f57a4a;
+    --brand-strong: #ff9a6e;
+    --pine: #3d7fd1;
+    --pine-strong: #6ba0e0;
+    --brick: #e2645a;
+    --brick-strong: #ef8b83;
+    --teal: #52a8c4;
+    --teal-strong: #7cc0d8;
 
     --good: #63b691;
     --good-bg: #23352c;
-    --warn: #e0b756;
+    --warn: #dfbb5e;
     --warn-bg: #3a3222;
-    --critical: #e08a7d;
+    --critical: #e0897d;
     --critical-bg: #3a2723;
 
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
@@ -86,28 +92,30 @@
 
 /* ============ TEMA ESCURO — escolha explícita do usuário ============ */
 :root[data-theme="dark"] {
-  --paper: #1b2119;
-  --surface: #222a20;
-  --surface-2: #2b3427;
-  --line: #3c4636;
+  --paper: #171c24;
+  --surface: #212833;
+  --surface-2: #2a323e;
+  --line: #3a4453;
 
-  --ink: #ecead9;
-  --ink-muted: #a9b09a;
-  --ink-on-brand: #1c1006;
-  --ink-on-pine: #eef1e4;
+  --ink: #f0ede4;
+  --ink-muted: #a8b0bd;
+  --ink-on-brand: #241005;
+  --ink-on-pine: #f0ede4;
 
-  --brand: #f0a23d;
-  --brand-strong: #f6bd6f;
-  --pine: #5c9a80;
-  --pine-strong: #83bda2;
-  --brick: #d97a5c;
-  --brick-strong: #e69a80;
+  --brand: #f57a4a;
+  --brand-strong: #ff9a6e;
+  --pine: #3d7fd1;
+  --pine-strong: #6ba0e0;
+  --brick: #e2645a;
+  --brick-strong: #ef8b83;
+  --teal: #52a8c4;
+  --teal-strong: #7cc0d8;
 
   --good: #63b691;
   --good-bg: #23352c;
-  --warn: #e0b756;
+  --warn: #dfbb5e;
   --warn-bg: #3a3222;
-  --critical: #e08a7d;
+  --critical: #e0897d;
   --critical-bg: #3a2723;
 
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
@@ -116,7 +124,7 @@
 
 /* ============ 2. TIPOGRAFIA ============ */
 :root {
-  --font-display: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fredoka", "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
@@ -142,7 +150,7 @@ h1, h2, h3 {
   margin: 0 0 0.4em;
   color: var(--ink);
 }
-h1 { font-size: clamp(1.9rem, 1.5rem + 2vw, 3rem); font-weight: 800; }
+h1 { font-size: clamp(1.9rem, 1.5rem + 2vw, 3rem); font-weight: 700; }
 h2 { font-size: clamp(1.4rem, 1.2rem + 1vw, 1.9rem); }
 h3 { font-size: 1.15rem; font-weight: 600; }
 
@@ -247,6 +255,28 @@ a { color: var(--pine-strong); }
 .badge--neutral { background: var(--surface-2); color: var(--ink-muted); }
 
 /* ============ 6. FORMULÁRIOS ============ */
+.form-block { display: flex; flex-direction: column; gap: 16px; }
+.form-block + .form-block {
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.form-block-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--pine);
+}
+.form-block-title .num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
 .field { display: flex; flex-direction: column; gap: 6px; }
 .field label {
   font-size: 0.86rem;
@@ -453,7 +483,7 @@ table.roster tr:hover td { background: var(--surface-2); }
 .poster--voluntario { background: linear-gradient(165deg, var(--pine), var(--pine-strong)); }
 .poster--parceiro { background: linear-gradient(165deg, var(--brand-strong), var(--brand)); color: var(--ink-on-brand); }
 .poster--doador { background: linear-gradient(165deg, var(--brick), var(--brick-strong)); }
-.poster--checkin { background: linear-gradient(165deg, var(--pine-strong), var(--brand-strong)); }
+.poster--checkin { background: linear-gradient(165deg, var(--teal), var(--teal-strong)); }
 
 .poster .eyebrow { color: inherit; opacity: 0.78; }
 .poster h2 { color: inherit; font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem); }

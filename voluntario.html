@@ -7,7 +7,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -35,69 +35,81 @@
       <input type="text" id="site" name="site" tabindex="-1" autocomplete="off">
     </div>
 
-    <div class="field">
-      <label for="nome">Nome completo</label>
-      <input class="input" type="text" id="nome" name="nome" required autocomplete="name">
-    </div>
+    <div class="form-block">
+      <div class="form-block-title"><span class="num">01</span> Sobre você</div>
 
-    <div class="field">
-      <label for="curso">Curso / área de formação</label>
-      <select class="input" id="curso" name="curso" required>
-        <option value="" disabled selected>Selecione um curso</option>
-      </select>
-    </div>
-
-    <div class="field" id="campo-outro-curso" style="display:none;">
-      <label for="outroCurso">Qual curso?</label>
-      <input class="input" type="text" id="outroCurso" name="outroCurso" placeholder="Digite seu curso">
-    </div>
-
-    <div class="row" style="align-items: flex-start; gap: 16px;">
-      <div class="field" style="flex: 1; min-width: 220px;">
-        <label for="email">E-mail</label>
-        <input class="input" type="email" id="email" name="email" required autocomplete="email">
+      <div class="field">
+        <label for="nome">Nome completo</label>
+        <input class="input" type="text" id="nome" name="nome" required autocomplete="name">
       </div>
-      <div class="field" style="flex: 1; min-width: 220px;">
-        <label for="telefone">Telefone / WhatsApp</label>
-        <input class="input" type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel">
+
+      <div class="row" style="align-items: flex-start; gap: 16px;">
+        <div class="field" style="flex: 1; min-width: 220px;">
+          <label for="email">E-mail</label>
+          <input class="input" type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="field" style="flex: 1; min-width: 220px;">
+          <label for="telefone">Telefone / WhatsApp</label>
+          <input class="input" type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel">
+        </div>
       </div>
     </div>
 
-    <div class="field">
-      <label>Disponibilidade</label>
-      <span class="hint">Pode marcar mais de uma opção.</span>
-      <div class="choice-grid" id="disponibilidade-grid"></div>
-    </div>
+    <div class="form-block">
+      <div class="form-block-title"><span class="num">02</span> Sua participação</div>
 
-    <div class="field">
-      <label for="funcao">Função de interesse</label>
-      <select class="input" id="funcao" name="funcao" required>
-        <option value="" disabled selected>Selecione uma função</option>
-      </select>
-    </div>
+      <div class="field">
+        <label for="curso">Curso / área de formação</label>
+        <select class="input" id="curso" name="curso" required>
+          <option value="" disabled selected>Selecione um curso</option>
+        </select>
+      </div>
 
-    <div class="field" id="campo-outra-funcao" style="display:none;">
-      <label for="outraFuncao">Qual função?</label>
-      <input class="input" type="text" id="outraFuncao" name="outraFuncao" placeholder="Descreva a função">
-    </div>
+      <div class="field" id="campo-outro-curso" style="display:none;">
+        <label for="outroCurso">Qual curso?</label>
+        <input class="input" type="text" id="outroCurso" name="outroCurso" placeholder="Digite seu curso">
+      </div>
 
-    <div class="field">
-      <label>Já participou de mutirões antes?</label>
-      <div class="choice-grid">
-        <label class="choice">
-          <input type="radio" name="jaParticipou" value="Sim" required>
-          <span>Sim</span>
-        </label>
-        <label class="choice">
-          <input type="radio" name="jaParticipou" value="Não" required>
-          <span>Não</span>
-        </label>
+      <div class="field">
+        <label>Disponibilidade</label>
+        <span class="hint">Pode marcar mais de uma opção.</span>
+        <div class="choice-grid" id="disponibilidade-grid"></div>
+      </div>
+
+      <div class="field">
+        <label for="funcao">Função de interesse</label>
+        <select class="input" id="funcao" name="funcao" required>
+          <option value="" disabled selected>Selecione uma função</option>
+        </select>
+      </div>
+
+      <div class="field" id="campo-outra-funcao" style="display:none;">
+        <label for="outraFuncao">Qual função?</label>
+        <input class="input" type="text" id="outraFuncao" name="outraFuncao" placeholder="Descreva a função">
+      </div>
+
+      <div class="field">
+        <label>Já participou de mutirões antes?</label>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="radio" name="jaParticipou" value="Sim" required>
+            <span>Sim</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="jaParticipou" value="Não" required>
+            <span>Não</span>
+          </label>
+        </div>
       </div>
     </div>
 
-    <div class="field">
-      <label for="observacoes">Observações <span class="hint">(opcional)</span></label>
-      <textarea id="observacoes" name="observacoes" placeholder="Alguma restrição, preferência de horário ou informação extra?"></textarea>
+    <div class="form-block">
+      <div class="form-block-title"><span class="num">03</span> Observações</div>
+
+      <div class="field">
+        <label for="observacoes">Alguma informação extra? <span class="hint">(opcional)</span></label>
+        <textarea id="observacoes" name="observacoes" placeholder="Restrição, preferência de horário, experiência prévia..."></textarea>
+      </div>
     </div>
 
     <button class="btn btn--primary btn--block" type="submit">Enviar inscrição</button>
