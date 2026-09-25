@@ -189,19 +189,25 @@ const CONFIG = {
     // "true" quando estiver pronto.
     ativo: true,
 
-    nome: "Floripa + Cor",
-    // Logo extraída do material de marca (não havia versão isolada em
-    // vetor). Troque pelo arquivo oficial da UniCesusc se/quando tiver
-    // um separado — ex: "assets/logo-unicesusc.png".
+    nome: "R+Cidades",
+    // Logo extraída do material de marca Floripa + Cor (não havia versão
+    // isolada em vetor). Troque pela logo do R+Cidades se/quando tiver
+    // — ex: "assets/logo-rcidades.png".
     logo: "assets/logo-floripa-cor.png",
     descricao:
-      "Este projeto é uma iniciativa de extensão do Grupo 02, ligada " +
-      "à disciplina R+Cidades da UniCesusc e ao projeto Floripa + Cor " +
-      "na Comunidade. Se você recebeu este link de alguém, pode ficar " +
-      "tranquilo: é um projeto real, ligado à instituição de ensino.",
+      "O R+Cidades é um projeto da Faculdade Cesusc, ligado ao curso de " +
+      "Arquitetura e Urbanismo, baseado no desenvolvimento regenerativo: " +
+      "relações mutuamente benéficas entre pessoas e lugares. Atua em " +
+      "transformações positivas nas cidades, respondendo a demandas da " +
+      "comunidade, com iniciativas como o Banco de Materiais (doações de " +
+      "materiais de construção para famílias) e projetos de habitação " +
+      "social. Este mutirão é uma ação de extensão do Grupo 02 junto ao " +
+      "R+Cidades e ao Floripa + Cor na Comunidade. Se você recebeu este " +
+      "link de alguém, pode ficar tranquilo: é um projeto real, ligado à " +
+      "instituição de ensino.",
     // Opcional: link para o Instagram/site da instituição ou do grupo,
     // pra quem quiser confirmar que o projeto existe de verdade antes
     // de doar. Deixe "" para não mostrar o link.
-    link: "",
+    link: "https://sites.google.com/faculdadecesusc.edu.br/rcidades/p%C3%A1gina-inicial",
   },
 };
