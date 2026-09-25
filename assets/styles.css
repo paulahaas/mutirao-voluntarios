@@ -528,8 +528,8 @@ table.roster tr:hover td { background: var(--surface-2); }
 }
 .footer-logo img {
   display: block;
-  max-height: 56px;
-  max-width: 160px;
+  max-height: 96px;
+  max-width: 140px;
   object-fit: contain;
 }
 .footer-text { flex: 1; min-width: 240px; }

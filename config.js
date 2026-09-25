@@ -190,10 +190,10 @@ const CONFIG = {
     ativo: true,
 
     nome: "R+Cidades",
-    // Logo extraída do material de marca Floripa + Cor (não havia versão
-    // isolada em vetor). Troque pela logo do R+Cidades se/quando tiver
+    // Logo oficial Floripa + Cor (versão branca, para o fundo azul do
+    // rodapé). Troque pela logo do R+Cidades se/quando tiver
     // — ex: "assets/logo-rcidades.png".
-    logo: "assets/logo-floripa-cor.png",
+    logo: "assets/logo-floripa-cor-branco.png",
     descricao:
       "O R+Cidades é um projeto da Faculdade Cesusc, ligado ao curso de " +
       "Arquitetura e Urbanismo, baseado no desenvolvimento regenerativo: " +
