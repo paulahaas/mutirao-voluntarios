@@ -137,6 +137,14 @@ const CONFIG = {
   },
 
   // ================================================================
+  // 6b. STATUS DE DOAÇÕES E PARCERIAS — etapas pelas quais cada doação
+  // ou parceria cadastrada passa, mostradas no painel (área protegida).
+  // O PRIMEIRO item é o status de todo novo cadastro e precisa ser
+  // igual ao valor padrão gravado em apps-script/Code.gs ("Novo").
+  // ================================================================
+  statusDoacao: ["Novo", "Em contato", "Recebido", "Cancelado"],
+
+  // ================================================================
   // 7. RESPONSÁVEL POR CADA FUNÇÃO — quem da organização coordena cada
   // atividade no dia do mutirão. Aparece no painel ao lado da barra de
   // preenchimento de cada função. Deixe "" se ainda não tiver definido.

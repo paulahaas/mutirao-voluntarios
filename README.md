@@ -75,11 +75,11 @@ apps-script/Code.gs                            → backend (cole no Google Apps 
    ```
 3. Crie outra aba chamada `parceiros` com o cabeçalho:
    ```
-   ID	Timestamp	Empresa	Responsavel	Email	Telefone	TipoParceria	Descricao	Observacoes
+   ID	Timestamp	Empresa	Responsavel	Email	Telefone	TipoParceria	Descricao	Observacoes	Status
    ```
 4. Crie outra aba chamada `doadores` com o cabeçalho:
    ```
-   ID	Timestamp	Nome	Email	Telefone	TipoContribuicao	Descricao	Observacoes
+   ID	Timestamp	Nome	Email	Telefone	TipoContribuicao	Descricao	Observacoes	Status
    ```
 5. Clique em **Compartilhar** → mude para **"Qualquer pessoa com o link"** → papel **Leitor**.
    Isso é necessário para o painel conseguir ler os dados. Ninguém consegue
@@ -173,6 +173,28 @@ ninguém). Tem um campo de busca por nome pra achar a pessoa rápido numa
 lista grande. Pode ser usada pela própria pessoa (escaneando o QR Code de
 check-in) ou por alguém da recepção com um tablet/celular.
 
+## 8. Status de doações e parcerias
+
+Dentro do painel (depois do código de acesso), a seção **"Doações e
+parcerias: status"** lista cada doação e cada parceria cadastrada e deixa
+trocar o status direto na tabela: **Novo** (todo cadastro começa aqui) →
+**Em contato** → **Recebido** (ou **Cancelado**). No topo da seção há um
+resumo com o total e quantos estão em cada status, e filtros por tipo e por
+status. A mudança é gravada na coluna `Status` da planilha.
+
+- As etapas ficam em `config.js` → `statusDoacao`. O primeiro item é o
+  status inicial e precisa ser igual a `STATUS_INICIAL` em
+  `apps-script/Code.gs`.
+- A coluna `Status` é criada sozinha pelo script nas abas `doadores` e
+  `parceiros` se ainda não existir. Cadastros antigos, sem status, aparecem
+  como "Novo".
+- **Depois de atualizar o site, atualize também o Apps Script**: abra
+  Extensões → Apps Script na planilha, apague o código antigo, cole o
+  conteúdo atual de `apps-script/Code.gs`, salve e vá em Implantar →
+  Gerenciar implantações → editar (lápis) → Versão: **Nova versão** →
+  Implantar. A URL do Web App continua a mesma. Sem isso, a troca de status
+  na tela volta ao valor antigo na próxima atualização automática.
+
 ## Personalizando textos, cores e listas
 
 | O que trocar | Onde |
@@ -180,6 +202,7 @@ check-in) ou por alguém da recepção com um tablet/celular.
 | Nome do evento, data, local, organização | `config.js` → `evento` |
 | Cursos sugeridos, lista de funções, disponibilidade | `config.js` → `voluntario` |
 | Tipos de parceria / contribuição | `config.js` → `parceiro` / `doador` |
+| Etapas de status das doações e parcerias | `config.js` → `statusDoacao` |
 | Responsáveis por função (painel) | `config.js` → `responsaveisPorFuncao` |
 | Código de acesso do painel | `config.js` → `painel.pin` |
 | Texto/logo do rodapé "Sobre nós" | `config.js` → `instituicao` (`ativo: true` pra mostrar) |

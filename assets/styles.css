@@ -462,6 +462,20 @@ table.roster tr:hover td { background: var(--surface-2); }
 .status-toggle button.warn[data-active="true"] { background: var(--warn-bg); color: var(--warn); }
 .status-toggle button.critical[data-active="true"] { background: var(--critical-bg); color: var(--critical); }
 
+select.status-select {
+  width: auto;
+  min-width: 140px;
+  padding: 6px 10px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  border-color: transparent;
+  cursor: pointer;
+}
+select.status-select[data-tom="neutral"] { background: var(--surface-2); color: var(--ink-muted); }
+select.status-select[data-tom="warn"] { background: var(--warn-bg); color: var(--warn); }
+select.status-select[data-tom="good"] { background: var(--good-bg); color: var(--good); }
+select.status-select[data-tom="critical"] { background: var(--critical-bg); color: var(--critical); }
+
 .empty-state {
   text-align: center;
   padding: 40px 20px;

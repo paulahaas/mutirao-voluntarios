@@ -25,15 +25,23 @@
  *                Disponibilidade | Funcao | JaParticipou |
  *                Observacoes | Confirmado | Presenca
  *   parceiros:   ID | Timestamp | Empresa | Responsavel | Email |
- *                Telefone | TipoParceria | Descricao | Observacoes
+ *                Telefone | TipoParceria | Descricao | Observacoes |
+ *                Status
  *   doadores:    ID | Timestamp | Nome | Email | Telefone |
- *                TipoContribuicao | Descricao | Observacoes
+ *                TipoContribuicao | Descricao | Observacoes | Status
+ *
+ * A coluna "Status" (parceiros e doadores) é criada sozinha pelo
+ * script se ainda não existir — não precisa digitar o cabeçalho.
  * ------------------------------------------------------------------
  */
 
 // E-mail da organização que recebe o aviso de "nova doação em
 // dinheiro". Troque pelo e-mail real da equipe se não for este.
 const EMAIL_ORGANIZACAO = "phaas2007@gmail.com";
+
+// Status de todo novo cadastro de doador/parceiro. Precisa ser igual
+// ao PRIMEIRO item de statusDoacao em config.js.
+const STATUS_INICIAL = "Novo";
 
 function doPost(e) {
   try {
@@ -46,6 +54,9 @@ function doPost(e) {
     }
 
     if (body.action === "create") {
+      if (body.sheet === "parceiros" || body.sheet === "doadores") {
+        garantirColunaStatus(sheet);
+      }
       sheet.appendRow(buildRow(body.sheet, body.data));
       enviarConfirmacao(body.sheet, body.data);
       notificarDoacaoDinheiro(body.sheet, body.data);
@@ -75,11 +86,11 @@ function buildRow(sheetName, d) {
   }
 
   if (sheetName === "parceiros") {
-    return [d.id, agora, d.empresa, d.responsavel, d.email, d.telefone, d.tipoParceria, d.descricao, d.observacoes];
+    return [d.id, agora, d.empresa, d.responsavel, d.email, d.telefone, d.tipoParceria, d.descricao, d.observacoes, STATUS_INICIAL];
   }
 
   if (sheetName === "doadores") {
-    return [d.id, agora, d.nome, d.email, d.telefone, d.tipoContribuicao, d.descricao, d.observacoes];
+    return [d.id, agora, d.nome, d.email, d.telefone, d.tipoContribuicao, d.descricao, d.observacoes, STATUS_INICIAL];
   }
 
   throw new Error("Aba sem mapeamento de colunas: " + sheetName);
@@ -148,16 +159,32 @@ function notificarDoacaoDinheiro(sheetName, d) {
   }
 }
 
-// Localiza a linha pelo ID (coluna A) e atualiza Confirmado e/ou Presenca.
+// Devolve o número (1, 2, 3...) da coluna "Status", criando o
+// cabeçalho no fim da linha 1 se ele ainda não existir.
+function garantirColunaStatus(sheet) {
+  const ultima = Math.max(sheet.getLastColumn(), 1);
+  const headers = sheet.getRange(1, 1, 1, ultima).getValues()[0];
+  const idx = headers.indexOf("Status");
+  if (idx > -1) return idx + 1;
+  sheet.getRange(1, ultima + 1).setValue("Status");
+  return ultima + 1;
+}
+
+// Localiza a linha pelo ID (coluna A) e atualiza Confirmado, Presenca
+// e/ou Status.
 function atualizarLinha(sheet, body) {
   const dados = sheet.getDataRange().getValues();
   const headers = dados[0];
   const colConfirmado = headers.indexOf("Confirmado");
   const colPresenca = headers.indexOf("Presenca");
+  const colStatus = body.status !== undefined ? garantirColunaStatus(sheet) : -1;
 
   for (let i = 1; i < dados.length; i++) {
     if (String(dados[i][0]) === String(body.id)) {
       const linhaPlanilha = i + 1;
+      if (colStatus > -1) {
+        sheet.getRange(linhaPlanilha, colStatus).setValue(body.status);
+      }
       if (body.confirmado !== undefined && colConfirmado > -1) {
         sheet.getRange(linhaPlanilha, colConfirmado + 1).setValue(body.confirmado);
       }

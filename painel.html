@@ -143,6 +143,49 @@
       <div class="empty-state" id="tabela-vazia">Nenhum voluntário encontrado com esses filtros.</div>
     </div>
   </section>
+
+  <section class="panel-section">
+    <h2>Doações e parcerias: status</h2>
+    <p class="desc muted">Acompanhe cada doação e parceria cadastrada, do primeiro contato até o recebimento. Troque o status direto na tabela — a mudança é gravada na planilha.</p>
+
+    <div class="stat-row" id="status-resumo" style="margin-bottom: 16px;"></div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="filters">
+        <div class="field">
+          <label for="filtro-tipo-contrib">Tipo</label>
+          <select class="input" id="filtro-tipo-contrib">
+            <option value="">Todos</option>
+            <option value="Doação">Doações</option>
+            <option value="Parceria">Parcerias</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filtro-status-contrib">Status</label>
+          <select class="input" id="filtro-status-contrib">
+            <option value="">Todos</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="roster">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Nome</th>
+            <th>Contribuição</th>
+            <th>Detalhes</th>
+            <th>Contato</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-contribuicoes"></tbody>
+      </table>
+      <div class="empty-state" id="contribuicoes-vazia" style="display:none;">Nenhuma doação ou parceria encontrada com esses filtros.</div>
+    </div>
+  </section>
   </div>
 </main>
 
